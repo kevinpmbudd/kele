@@ -22,7 +22,14 @@ class Kele
   end
 
   def get_me
-    response = self.class.get('/users/me', headers: { "authorization" => @auth_token })
+    url = '/users/me'
+    response = self.class.get(url, headers: { "authorization" => @auth_token })
+    JSON.parse(response.body)
+  end
+
+  def get_mentor_availability(mentor_id)
+    url = "/mentors/#{mentor_id}/student_availability"
+    response = self.class.get(url, headers: { "authorization" => @auth_token })
     JSON.parse(response.body)
   end
 end
