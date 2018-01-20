@@ -28,9 +28,13 @@ class Kele
   end
 
   def get_me
-    url = '/users/me'
-    response = self.class.get(url, headers: { "authorization" => @auth_token })
-    JSON.parse(response.body)
+    if @auth_token
+      url = '/users/me'
+      response = self.class.get(url, headers: { "authorization" => @auth_token })
+      JSON.parse(response.body)
+    else
+      puts "Not logged in. Please log in."
+    end 
   end
 
   def get_mentor_availability(mentor_id)
