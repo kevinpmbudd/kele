@@ -14,12 +14,16 @@ class Kele
         password: password
       }
     }
-
-    response = self.class.post('/sessions', options)
-    if response.code == 200
-      @auth_token = response.parsed_response["auth_token"]
-    else
-      puts "Error: #{response.code}. Authentication failed. Try again."
+    begin
+      response = self.class.post('/sessions', options)
+      if response.code == 200
+        @auth_token = response.parsed_response["auth_token"]
+      else
+        puts "Error: #{response.code}. Authentication failed. Try again."
+      end
+    rescue => e
+      puts e.message
+      puts e.backtrace.inspect
     end
   end
 
