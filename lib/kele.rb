@@ -34,12 +34,16 @@ class Kele
       JSON.parse(response.body)
     else
       puts "Not logged in. Please log in."
-    end 
+    end
   end
 
   def get_mentor_availability(mentor_id)
-    url = "/mentors/#{mentor_id}/student_availability"
-    response = self.class.get(url, headers: { "authorization" => @auth_token })
-    JSON.parse(response.body)
+    if @auth_token
+      url = "/mentors/#{mentor_id}/student_availability"
+      response = self.class.get(url, headers: { "authorization" => @auth_token })
+      JSON.parse(response.body)
+    else
+      puts "Not logged in. Please log in."
+    end
   end
 end
