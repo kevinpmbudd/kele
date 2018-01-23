@@ -10,7 +10,6 @@ module Checkpoints
         "enrollment_id": self.get_me["current_enrollment"]["id"]
       },
       headers: {
-        "content-type" => 'application/json',
         "authorization" => @auth_token
       }
     }
